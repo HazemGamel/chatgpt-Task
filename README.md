@@ -1,4 +1,7 @@
 # gpttask
+chat gpt task for tqnia company
+ui like figma 
+integrated with chat gpt api 
 
 A new Flutter project.
 
