@@ -9,6 +9,7 @@ import '../../shared/components/navigator.dart';
 import '../../shared/components/text_form_field.dart';
 import '../../shared/providers/chatsprovider.dart';
 import '../../shared/style/color.dart';
+import '../../shared/style/enum/enum.dart';
 import '../../shared/style/images.dart';
 
 class ChatScreen extends StatelessWidget {
@@ -79,8 +80,8 @@ class ChatScreen extends StatelessWidget {
                     style:
                     Theme.of(context).textTheme.titleMedium!.copyWith(
                       fontWeight: FontWeight.w600,
-                      color: AppMainColors.whiteColor
-                          .withOpacity(0.4000000059604645),
+                      color: chatsProvider.currentTheme==AppTheme.darkTheme?
+                      AppMainColors.greyColor:AppMainColors.secondColor,
                     ),
                   ),
                 )
@@ -91,9 +92,13 @@ class ChatScreen extends StatelessWidget {
                         child: ListView.separated(
                           physics: const BouncingScrollPhysics(),
                           controller:chatsProvider.listScrollController,
-                          itemCount: chatsProvider.getmessages.length, //chatList.length,
+                          itemCount:chatsProvider.getmessages.length, //chatList.length,
                           itemBuilder: (context, index) {
                             return ChatWidget(
+                              chatcolor: chatsProvider.currentTheme==AppTheme.darkTheme?
+                              AppMainColors.greyColor:AppMainColors.greyColor ,
+                              textcolor:chatsProvider.currentTheme==AppTheme.darkTheme?
+                              AppMainColors.whiteColor:AppMainColors.whiteColor  ,
                               msg: chatsProvider.
                               getmessages[index].message,
                               chatIndex: chatsProvider.messages[index].isUser,
@@ -146,11 +151,12 @@ class ChatScreen extends StatelessWidget {
                               const SizedBox(width: 10),
                               Text(
                                 'Regenerate response',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelSmall!
-                                    .copyWith(
-                                    fontWeight: FontWeight.w500),
+                                style: TextStyle(
+                                  color: chatsProvider.currentTheme==AppTheme.darkTheme?
+                                  AppMainColors.whiteColor:AppMainColors.whiteColor ,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ],
                           ),
@@ -164,8 +170,8 @@ class ChatScreen extends StatelessWidget {
                     height: 43,
                     padding: const EdgeInsets.all(12),
                     decoration: ShapeDecoration(
-                      color: AppMainColors.whiteColor
-                          .withOpacity(0.20000000298023224),
+                      color: chatsProvider.currentTheme==AppTheme.darkTheme?
+                      AppMainColors.whiteColor:AppMainColors.darkColor ,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(8),
@@ -174,8 +180,9 @@ class ChatScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    child: const SpinKitThreeBounce(
-                      color: AppMainColors.whiteColor,
+                    child:  SpinKitThreeBounce(
+                      color: chatsProvider.currentTheme==AppTheme.darkTheme?
+                      AppMainColors.darkColor:AppMainColors.whiteColor ,
                       size: 18,
                     ),
                   ),
@@ -193,13 +200,15 @@ class ChatScreen extends StatelessWidget {
                    await chatsProvider.sendMessage(context);
                   },
                   validate: (String? value) {
-                    if (value!.trim().isEmpty) {
+                    if (value!.isEmpty) {
                       return "Please type a message";
                     }
                     return null;
                   },
                   hint: '',
                   suffix: const AssetImage(Assets.imagesSend),
+                  filecolor: chatsProvider.currentTheme==AppTheme.darkTheme?
+                  AppMainColors.secondColor:AppMainColors.greyColor,
                 ),
                 const SizedBox(
                   height: 15,

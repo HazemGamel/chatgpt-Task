@@ -10,7 +10,7 @@ class DefaultTextFormField extends StatelessWidget {
     required this.validate,
     required this.hint,
     this.suffix,
-    this.suffixPressed,
+    this.suffixPressed, this.filecolor,
   });
 
   final TextEditingController controller;
@@ -19,6 +19,7 @@ class DefaultTextFormField extends StatelessWidget {
   final String hint;
   final ImageProvider? suffix;
   final Function? suffixPressed;
+  final Color? filecolor;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -62,7 +63,7 @@ class DefaultTextFormField extends StatelessWidget {
             ),
           ),
           filled: true,
-          fillColor: const Color(0xff484954),
+          fillColor: filecolor,
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
             borderSide: BorderSide(

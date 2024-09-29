@@ -10,9 +10,10 @@ class DashboardChatList extends StatelessWidget {
   const DashboardChatList({
     super.key,
     required this.msg,
-    this.shouldAnimate = false,
+    this.shouldAnimate = false, this.textColor,
   });
   final String msg;
+  final Color? textColor;
   final bool shouldAnimate;
 
   @override
@@ -22,7 +23,7 @@ class DashboardChatList extends StatelessWidget {
       child: TextWidget(
         maxLine: 1,
         label: msg,
-        textColor: AppMainColors.whiteColor,
+        textColor: textColor,
         fontWeight: FontWeight.w600,
       ),
     );
@@ -34,12 +35,14 @@ class ChatWidget extends StatelessWidget {
     super.key,
     required this.msg,
     required this.chatIndex,
-    this.shouldAnimate = false,
+    this.shouldAnimate = false, this.chatcolor, this.textcolor,
   });
 
   final String msg;
   final bool chatIndex;
   final bool shouldAnimate;
+  final Color? chatcolor;
+  final Color? textcolor;
   @override
   Widget build(BuildContext context) {
     if (chatIndex) {
@@ -77,7 +80,7 @@ class ChatWidget extends StatelessWidget {
             padding: const EdgeInsets.all(12),
             margin: const EdgeInsets.only(right: 40),
             decoration: ShapeDecoration(
-              color: AppMainColors.whiteColor.withOpacity(0.20),
+              color: chatcolor,
               shape: RoundedRectangleBorder(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(8),
@@ -89,7 +92,7 @@ class ChatWidget extends StatelessWidget {
             child: shouldAnimate
                 ? DefaultTextStyle(
                     style: GoogleFonts.raleway(
-                      color: AppMainColors.whiteColor,
+                      color: textcolor,
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
                     ),
@@ -106,7 +109,7 @@ class ChatWidget extends StatelessWidget {
                   )
                 : TextWidget(
                     label: msg,
-                    textColor: AppMainColors.whiteColor,
+                    textColor: textcolor,
                     fontWeight: FontWeight.w600,
                   ),
           ),

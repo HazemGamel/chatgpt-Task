@@ -12,6 +12,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../shared/components/onboardingitem.dart';
+import '../../shared/style/enum/enum.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
@@ -58,7 +59,7 @@ class OnBoardingScreen extends StatelessWidget {
             Text(
               'Ask anything, get your answer',
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleMedium,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             SizedBox(height: 30),
             Expanded(
@@ -74,7 +75,8 @@ class OnBoardingScreen extends StatelessWidget {
                 itemCount: onboardingprovider.onBoarding.length,
               ),
             ),
-            Row(
+            SizedBox(height: 10),
+             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SmoothPageIndicator(

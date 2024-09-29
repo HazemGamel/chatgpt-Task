@@ -23,6 +23,7 @@ class OnBoardingItem extends StatelessWidget {
           width: 24,
           fit: BoxFit.fitHeight,
           height: 24.h,
+          color: AppMainColors.greyColor,
           placeholderBuilder: (_) => Shimmer.fromColors(
             baseColor: Colors.grey[850]!,
             highlightColor: Colors.grey[800]!,
@@ -36,9 +37,7 @@ class OnBoardingItem extends StatelessWidget {
         Text(
           onBoardingModel.title,
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.titleMedium!.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(context).textTheme.headlineMedium,
         ),
         SizedBox(height: 30.h),
         ListOfText(onBoardingModel: onBoardingModel.body),

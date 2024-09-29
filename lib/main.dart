@@ -1,11 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:gpttask/screen/splash/splashscreen.dart';
 import 'package:gpttask/shared/providers/chatsprovider.dart';
 import 'package:gpttask/shared/providers/onboardingprovider.dart';
 import 'package:gpttask/shared/style/enum/enum.dart';
 import 'package:gpttask/shared/style/themes.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,20 +28,24 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: ScreenUtilInit(
-          designSize: ScreenUtil.defaultSize,
-          minTextAdapt: true,
-          splitScreenMode: true,
-          builder: (context, child) {
-            return MaterialApp(
-              title: 'Tqnia Task',
-              theme: getThemeData[AppTheme.darkTheme],
-              darkTheme: getThemeData[AppTheme.darkTheme],
-              themeMode: ThemeMode.dark,
-              debugShowCheckedModeBanner: false,
-              home: const SplashScreen(),
-            );
-          }),
+        designSize: ScreenUtil.defaultSize,
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) {
+          return Consumer<ChatsProvider>(
+            builder: (context, chatsProvider, child) {
+              return MaterialApp(
+                title: 'Task',
+                theme: getThemeData[chatsProvider.currentTheme], // Apply dynamic theme
+                darkTheme: getThemeData[AppTheme.darkTheme],     // Dark theme
+                themeMode: ThemeMode.system,                    // Use system mode (can be dynamic)
+                debugShowCheckedModeBanner: false,
+                home: const SplashScreen(),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
-

@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 final getThemeData = {
   AppTheme.darkTheme: ThemeData(
-    scaffoldBackgroundColor: AppMainColors.secondColor,
+    scaffoldBackgroundColor: AppMainColors.darkColor,
     primarySwatch: Colors.green,
     appBarTheme: AppBarTheme(
       titleSpacing: 20.0,
@@ -15,7 +15,7 @@ final getThemeData = {
         statusBarIconBrightness: Brightness.dark,
         statusBarBrightness: Brightness.light,
       ),
-      backgroundColor: AppMainColors.secondColor,
+      backgroundColor: AppMainColors.darkColor,
       elevation: 1,
       titleTextStyle: GoogleFonts.raleway(
         color: AppMainColors.whiteColor,
@@ -73,6 +73,7 @@ final getThemeData = {
       ),
       headlineMedium: GoogleFonts.raleway(
         color: AppMainColors.whiteColor,
+        fontSize: 15,
       ),
       headlineSmall: GoogleFonts.raleway(
         color: AppMainColors.whiteColor,
@@ -119,7 +120,7 @@ final getThemeData = {
       ),
       titleMedium: GoogleFonts.raleway(
         fontSize: 16,
-        color: AppMainColors.darkColor,
+        color: AppMainColors.whiteColor,
         fontWeight: FontWeight.w700,
       ),
       labelLarge: GoogleFonts.raleway(

@@ -6,6 +6,7 @@ import '../components/text_widget.dart';
 import '../constants.dart';
 import '../style/checkinternet.dart';
 import '../style/color.dart';
+import '../style/enum/enum.dart';
 class ChatsProvider with ChangeNotifier{
 
   final model = GenerativeModel(model: 'gemini-pro',
@@ -19,6 +20,22 @@ class ChatsProvider with ChangeNotifier{
   late TextEditingController textEditingController;
   late ScrollController listScrollController;
   late FocusNode focusNode;
+  AppTheme _currentTheme = AppTheme.lightThem;
+
+  AppTheme get currentTheme => _currentTheme;
+  String title = "Light mode";
+  void toggleTheme() {
+    if (_currentTheme == AppTheme.lightThem) {
+      _currentTheme = AppTheme.darkTheme;
+      title="Dark mode";
+      print(_currentTheme);
+    } else {
+      _currentTheme = AppTheme.lightThem;
+      title="Light mode";
+      print(_currentTheme);
+    }
+    notifyListeners();
+  }
 
   void initState() {
     listScrollController = ScrollController();
@@ -120,6 +137,9 @@ class ChatsProvider with ChangeNotifier{
   void clearMessages() {
     messages.clear();
     notifyListeners();
+  }
+  void changeTheme(){
+
   }
 @override
   void dispose() {

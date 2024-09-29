@@ -4,6 +4,8 @@ import 'package:gpttask/screen/OnBoarding/on_boarding_screen.dart';
 import 'package:gpttask/shared/components/navigator.dart';
 import 'package:gpttask/shared/style/images.dart';
 
+import '../../shared/style/color.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -22,6 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:AppMainColors.secondColor,
       body: SafeArea(
         child: Center(
           child: Column(

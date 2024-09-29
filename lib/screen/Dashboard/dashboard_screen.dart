@@ -1,4 +1,5 @@
 import 'package:gpttask/screen/Conversation/chatscreen.dart';
+import 'package:gpttask/screen/splash/splashscreen.dart';
 import 'package:gpttask/shared/style/images.dart';
 import 'package:gpttask/shared/components/chat_widget.dart';
 import 'package:gpttask/shared/components/my_divider.dart';
@@ -12,6 +13,8 @@ import 'package:provider/provider.dart';
 
 import '../../shared/components/listofoptions.dart';
 import '../../shared/providers/chatsprovider.dart';
+import '../../shared/providers/onboardingprovider.dart';
+import '../../shared/style/enum/enum.dart';
 import '../questions/questionsscreen.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -24,11 +27,11 @@ class DashboardScreen extends StatelessWidget {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(),
       child: Scaffold(
-        backgroundColor: AppMainColors.darkColor,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
           elevation: 0,
           toolbarHeight: 10,
-          backgroundColor: AppMainColors.darkColor,
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         ),
         body: Column(
           children: [
@@ -41,12 +44,14 @@ class DashboardScreen extends StatelessWidget {
                 height: 52.h,
                 width: 335.w,
                 decoration: BoxDecoration(
-                    color: AppMainColors.darkColor,
+                    color: chatsProvider.currentTheme==AppTheme.darkTheme?
+                    AppMainColors.darkColor:AppMainColors.whiteColor ,
                     borderRadius: BorderRadius.circular(1)),
                 child: Row(
                   children: [
-                    const ImageIcon(
-                      color: AppMainColors.whiteColor,
+                     ImageIcon(
+                      color: chatsProvider.currentTheme==AppTheme.darkTheme?
+                      AppMainColors.whiteColor:AppMainColors.darkColor ,
                       AssetImage(Assets.imagesMessage),
                     ),
                     SizedBox(
@@ -54,11 +59,17 @@ class DashboardScreen extends StatelessWidget {
                     ),
                     Text(
                       'New Chat',
-                      style: Theme.of(context).textTheme.titleMedium,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color:chatsProvider.currentTheme==AppTheme.darkTheme?
+                        AppMainColors.whiteColor:AppMainColors.darkColor  ,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                     const Spacer(),
-                    const ImageIcon(
-                      color: AppMainColors.whiteColor,
+                     ImageIcon(
+                      color: chatsProvider.currentTheme==AppTheme.darkTheme?
+                      AppMainColors.whiteColor:AppMainColors.darkColor ,
                       AssetImage(Assets.imagesArrowForward2),
                     ),
                   ],
@@ -76,12 +87,14 @@ class DashboardScreen extends StatelessWidget {
                   height: 52.h,
                   width: 335.w,
                   decoration: BoxDecoration(
-                      color: AppMainColors.darkColor,
+                      color: chatsProvider.currentTheme==AppTheme.darkTheme?
+                      AppMainColors.darkColor:AppMainColors.whiteColor ,
                       borderRadius: BorderRadius.circular(1)),
                   child: Row(
                     children: [
-                      const ImageIcon(
-                        color: AppMainColors.whiteColor,
+                       ImageIcon(
+                        color: chatsProvider.currentTheme==AppTheme.darkTheme?
+                        AppMainColors.whiteColor:AppMainColors.darkColor ,
                         AssetImage(Assets.imagesMessage),
                       ),
                       SizedBox(
@@ -98,6 +111,8 @@ class DashboardScreen extends StatelessWidget {
                               if(chatsProvider.messages[index].isUser)
                                {
                                 return DashboardChatList(
+                                  textColor: chatsProvider.currentTheme==AppTheme.darkTheme?
+                                  AppMainColors.whiteColor:AppMainColors.darkColor ,
                                   msg: chatsProvider.getmessages[index]
                                       .message,
                                   shouldAnimate:
@@ -108,8 +123,9 @@ class DashboardScreen extends StatelessWidget {
                               return const SizedBox.shrink();
                             }),
                       ),
-                      const ImageIcon(
-                        color: AppMainColors.whiteColor,
+                       ImageIcon(
+                        color: chatsProvider.currentTheme==AppTheme.darkTheme?
+                        AppMainColors.whiteColor:AppMainColors.darkColor ,
                         AssetImage(Assets.imagesArrowForward2),
                       ),
                     ],
@@ -125,12 +141,17 @@ class DashboardScreen extends StatelessWidget {
               margin: const EdgeInsetsDirectional.symmetric(
                 horizontal: 12,
               ),
-              decoration: const BoxDecoration(
-                color: AppMainColors.darkColor,
+              decoration:  BoxDecoration(
+                color:chatsProvider.currentTheme==AppTheme.darkTheme?
+                AppMainColors.darkColor:AppMainColors.whiteColor,
               ),
               child: Column(
                 children: [
                   ListOfOptions(
+                    iconColor:chatsProvider.currentTheme==AppTheme.darkTheme?
+                    AppMainColors.whiteColor:AppMainColors.darkColor ,
+                    textColor:chatsProvider.currentTheme==AppTheme.darkTheme?
+                    AppMainColors.whiteColor:AppMainColors.darkColor ,
                     imageIcon: Assets.imagesDelete,
                     text: 'Clear conversations',
                     function: () {
@@ -142,6 +163,10 @@ class DashboardScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ListOfOptions(
+                          iconColor:chatsProvider.currentTheme==AppTheme.darkTheme?
+                          AppMainColors.whiteColor:AppMainColors.darkColor ,
+                          textColor:chatsProvider.currentTheme==AppTheme.darkTheme?
+                          AppMainColors.whiteColor:AppMainColors.darkColor ,
                           function: () {
                           },
                           imageIcon: Assets.imagesUser,
@@ -175,13 +200,22 @@ class DashboardScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 8.h),
                   ListOfOptions(
+                    iconColor:chatsProvider.currentTheme==AppTheme.darkTheme?
+                    AppMainColors.whiteColor:AppMainColors.darkColor ,
+                    textColor:chatsProvider.currentTheme==AppTheme.darkTheme?
+                    AppMainColors.whiteColor:AppMainColors.darkColor ,
                     function: () {
+                      chatsProvider.toggleTheme();
                     },
                     imageIcon: Assets.imagesSun,
-                    text: 'Light mode',
+                    text: '${chatsProvider.title}',
                   ),
                   SizedBox(height: 8.h),
                   ListOfOptions(
+                    iconColor:chatsProvider.currentTheme==AppTheme.darkTheme?
+                    AppMainColors.whiteColor:AppMainColors.darkColor ,
+                    textColor:chatsProvider.currentTheme==AppTheme.darkTheme?
+                    AppMainColors.whiteColor:AppMainColors.darkColor ,
                     function: () {
                       navigateTo(context, QuestionsScreen());
                     },
@@ -191,11 +225,16 @@ class DashboardScreen extends StatelessWidget {
                   SizedBox(height: 8.h),
                   ListOfOptions(
                     function: () {
+                      final onboardingprovider = Provider.of<OnBoardingProvider>(context,listen: false);
+                       onboardingprovider.isLast=false;
+                      navigateAndFinish(context, SplashScreen());
                     },
                     imageIcon: Assets.imagesLogout,
                     text: 'Logout',
-                    textColor: AppMainColors.redColor,
-                    iconColor: AppMainColors.redColor,
+                    iconColor:chatsProvider.currentTheme==AppTheme.darkTheme?
+                    AppMainColors.redColor:AppMainColors.darkColor ,
+                    textColor:chatsProvider.currentTheme==AppTheme.darkTheme?
+                    AppMainColors.redColor:AppMainColors.darkColor ,
                   ),
                 ],
               ),
